@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  ashketing-website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ashketing-website
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ashketing.rule=Host(`ashketing.com`) || Host(`www.ashketing.com`)"
+      - "traefik.http.routers.ashketing.entrypoints=websecure"
+      - "traefik.http.routers.ashketing.tls.certresolver=letsencrypt"
+      - "traefik.http.services.ashketing.loadbalancer.server.port=80"
+      # Redirect www to non-www
+      - "traefik.http.middlewares.ashketing-redirect.redirectregex.regex=^https://www\\.ashketing\\.com/(.*)"
+      - "traefik.http.middlewares.ashketing-redirect.redirectregex.replacement=https://ashketing.com/$${1}"
+      - "traefik.http.middlewares.ashketing-redirect.redirectregex.permanent=true"
+      - "traefik.http.routers.ashketing.middlewares=ashketing-redirect"

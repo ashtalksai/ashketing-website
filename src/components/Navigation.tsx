@@ -6,10 +6,10 @@ import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/services', label: 'Services' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/', label: 'home', cmd: 'cd ~' },
+  { href: '/services', label: 'services', cmd: 'ls services/' },
+  { href: '/about', label: 'about', cmd: 'cat about.md' },
+  { href: '/contact', label: 'contact', cmd: 'mail -s' },
 ];
 
 export function Navigation() {
@@ -19,64 +19,58 @@ export function Navigation() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold hover:text-accent transition-colors">
-          ash<span className="text-accent">keting</span>
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="flex items-center gap-2">
+            <span className="status-dot active" />
+            <span className="text-text-muted text-xs">ready</span>
+          </div>
+          <div className="flex items-center">
+            <span className="text-primary">~/</span>
+            <span className="text-foreground font-semibold">ashketing</span>
+            <span className="cursor" />
+          </div>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-3">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`text-sm font-medium transition-colors hover:text-accent ${
-                pathname === item.href ? 'text-accent' : 'text-muted'
-              }`}
+              className={`nav-cmd ${pathname === item.href ? 'active' : ''}`}
             >
-              {item.label}
+              <span className="cmd-prefix">$</span>
+              <span className={pathname === item.href ? 'text-primary' : ''}>{item.cmd}</span>
             </Link>
           ))}
-          <Link
-            href="/contact"
-            className="bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
-          >
-            Let's Talk
-          </Link>
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2"
+          className="md:hidden p-2 border border-border rounded-lg hover:border-primary/50 transition-colors"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
+          {isOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </nav>
 
       {/* Mobile Navigation */}
       {isOpen && (
         <div className="md:hidden bg-surface border-b border-border animate-fade-in">
-          <div className="px-6 py-4 flex flex-col gap-4">
+          <div className="px-6 py-4 flex flex-col gap-2">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setIsOpen(false)}
-                className={`text-sm font-medium transition-colors ${
-                  pathname === item.href ? 'text-accent' : 'text-muted'
-                }`}
+                className={`nav-cmd justify-start ${pathname === item.href ? 'active' : ''}`}
               >
-                {item.label}
+                <span className="cmd-prefix">$</span>
+                <span className={pathname === item.href ? 'text-primary' : ''}>{item.cmd}</span>
               </Link>
             ))}
-            <Link
-              href="/contact"
-              onClick={() => setIsOpen(false)}
-              className="bg-accent hover:bg-accent/90 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors text-center"
-            >
-              Let's Talk
-            </Link>
           </div>
         </div>
       )}

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Send, Linkedin, Mail, Calendar, ArrowUpRight, CheckCircle, Loader2 } from 'lucide-react';
+import { Send, Linkedin, Mail, Calendar, ArrowUpRight, CheckCircle, Loader2, Github } from 'lucide-react';
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -17,14 +17,11 @@ export default function ContactPage() {
     setStatus('loading');
     
     // Simulate form submission
-    // Replace with actual form handling (e.g., API route, Formspree, etc.)
     await new Promise((resolve) => setTimeout(resolve, 1000));
     
-    // For now, just show success
     setStatus('success');
     setFormState({ name: '', email: '', company: '', message: '' });
     
-    // Reset after 5 seconds
     setTimeout(() => setStatus('idle'), 5000);
   };
 
@@ -40,12 +37,15 @@ export default function ContactPage() {
       {/* Header */}
       <section className="px-6 mb-16">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Let's Build Something Together
+          <div className="inline-flex items-center gap-2 mb-4">
+            <span className="cmd-comment">// contact</span>
+          </div>
+          <h1 className="text-4xl font-bold mb-6">
+            Let&apos;s <span className="text-primary">Build</span> Something
           </h1>
-          <p className="text-lg text-muted max-w-2xl mx-auto">
+          <p className="text-text-secondary max-w-2xl mx-auto">
             Ready to automate your workflows? Have a question about AI? 
-            Or just want to say hi? I'd love to hear from you.
+            Or just want to say hi? I&apos;d love to hear from you.
           </p>
         </div>
       </section>
@@ -55,19 +55,39 @@ export default function ContactPage() {
           <div className="grid md:grid-cols-2 gap-12">
             {/* Contact Info */}
             <div>
-              <h2 className="text-2xl font-bold mb-6">Get In Touch</h2>
+              <div className="terminal-window mb-6">
+                <div className="window-header">
+                  <div className="window-dots">
+                    <span className="window-dot red" />
+                    <span className="window-dot yellow" />
+                    <span className="window-dot green" />
+                  </div>
+                  <span className="window-title">contact-info.json</span>
+                </div>
+                <div className="window-content">
+                  <pre className="text-sm text-text-secondary">
+{`{
+  "email": "ash@ashketing.com",
+  "location": "Rotterdam, NL",
+  "timezone": "CET (UTC+1)",
+  "response_time": "24-48h",
+  "preferred": ["email", "linkedin"]
+}`}
+                  </pre>
+                </div>
+              </div>
               
-              <div className="space-y-6 mb-8">
+              <div className="space-y-4 mb-8">
                 <a
                   href="mailto:ash@ashketing.com"
-                  className="flex items-center gap-4 p-4 bg-surface border border-border rounded-xl hover:border-accent transition-colors group"
+                  className="flex items-center gap-4 p-4 terminal-window hover:border-primary/50 transition-colors group"
                 >
-                  <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
-                    <Mail className="text-accent" size={24} />
-                  </div>
-                  <div>
-                    <p className="font-medium group-hover:text-accent transition-colors">Email</p>
-                    <p className="text-muted text-sm">ash@ashketing.com</p>
+                  <Mail className="text-primary" size={20} />
+                  <div className="flex-1">
+                    <p className="font-medium group-hover:text-primary transition-colors">
+                      ash@ashketing.com
+                    </p>
+                    <p className="text-text-muted text-xs">Primary contact</p>
                   </div>
                 </a>
 
@@ -75,148 +95,184 @@ export default function ContactPage() {
                   href="https://www.linkedin.com/in/ashhatef/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-surface border border-border rounded-xl hover:border-accent transition-colors group"
+                  className="flex items-center gap-4 p-4 terminal-window hover:border-primary/50 transition-colors group"
                 >
-                  <div className="w-12 h-12 bg-[#0A66C2]/10 rounded-lg flex items-center justify-center">
-                    <Linkedin className="text-[#0A66C2]" size={24} />
-                  </div>
+                  <Linkedin className="text-primary" size={20} />
                   <div className="flex-1">
-                    <p className="font-medium group-hover:text-accent transition-colors">LinkedIn</p>
-                    <p className="text-muted text-sm">Connect with me</p>
+                    <p className="font-medium group-hover:text-primary transition-colors">
+                      LinkedIn
+                    </p>
+                    <p className="text-text-muted text-xs">Professional network</p>
                   </div>
-                  <ArrowUpRight className="text-muted" size={18} />
+                  <ArrowUpRight className="text-text-muted" size={16} />
+                </a>
+
+                <a
+                  href="https://github.com/ashhatef"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-4 terminal-window hover:border-primary/50 transition-colors group"
+                >
+                  <Github className="text-primary" size={20} />
+                  <div className="flex-1">
+                    <p className="font-medium group-hover:text-primary transition-colors">
+                      GitHub
+                    </p>
+                    <p className="text-text-muted text-xs">Open source work</p>
+                  </div>
+                  <ArrowUpRight className="text-text-muted" size={16} />
                 </a>
               </div>
 
-              {/* Calendly Placeholder */}
-              <div className="bg-surface border border-border rounded-xl p-6">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
-                    <Calendar className="text-accent" size={24} />
+              {/* Calendar */}
+              <div className="terminal-window">
+                <div className="window-header">
+                  <div className="window-dots">
+                    <span className="window-dot red" />
+                    <span className="window-dot yellow" />
+                    <span className="window-dot green" />
                   </div>
-                  <div>
-                    <p className="font-medium">Book a Call</p>
-                    <p className="text-muted text-sm">Schedule a free discovery call</p>
-                  </div>
+                  <span className="window-title">schedule-call.sh</span>
                 </div>
-                
-                {/* Calendly embed placeholder */}
-                <div className="bg-background border border-border rounded-lg h-64 flex items-center justify-center">
-                  <div className="text-center text-muted">
-                    <Calendar size={48} className="mx-auto mb-4 opacity-50" />
-                    <p className="text-sm">Calendly Embed</p>
-                    <p className="text-xs mt-1">Add your Calendly widget here</p>
+                <div className="window-content">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Calendar className="text-primary" size={20} />
+                    <div>
+                      <p className="font-medium">Book a Call</p>
+                      <p className="text-text-muted text-xs">30-min free discovery call</p>
+                    </div>
                   </div>
+                  
+                  <div className="bg-background border border-border rounded-lg h-48 flex items-center justify-center mb-4">
+                    <div className="text-center text-text-muted">
+                      <Calendar size={32} className="mx-auto mb-2 opacity-50" />
+                      <p className="text-xs cmd-comment">// Calendly embed</p>
+                    </div>
+                  </div>
+                  
+                  <a
+                    href="#"
+                    className="btn btn-primary w-full"
+                  >
+                    <span className="cmd-prefix" style={{ color: '#0a0a0a' }}>$</span>
+                    ./book-call.sh
+                    <Calendar size={14} />
+                  </a>
                 </div>
-                
-                {/* Alternative: Direct link to Calendly */}
-                <a
-                  href="#"
-                  className="mt-4 w-full bg-accent hover:bg-accent/90 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
-                >
-                  <Calendar size={18} />
-                  Schedule a Call
-                </a>
               </div>
             </div>
 
             {/* Contact Form */}
             <div>
-              <h2 className="text-2xl font-bold mb-6">Send a Message</h2>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">
-                    Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formState.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full bg-surface border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-accent transition-colors"
-                    placeholder="Your name"
-                  />
+              <div className="terminal-window">
+                <div className="window-header">
+                  <div className="window-dots">
+                    <span className="window-dot red" />
+                    <span className="window-dot yellow" />
+                    <span className="window-dot green" />
+                  </div>
+                  <span className="window-title">send-message.sh</span>
+                  <span className="window-status">
+                    {status === 'success' ? 'sent ✓' : 'ready'}
+                  </span>
                 </div>
+                <div className="window-content">
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    <div>
+                      <label htmlFor="name" className="block text-xs text-text-muted mb-2">
+                        <span className="cmd-keyword">const</span> name <span className="text-text-muted">=</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formState.name}
+                        onChange={handleChange}
+                        required
+                        className="input"
+                        placeholder="&quot;Your name&quot;"
+                      />
+                    </div>
 
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formState.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full bg-surface border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-accent transition-colors"
-                    placeholder="your@email.com"
-                  />
+                    <div>
+                      <label htmlFor="email" className="block text-xs text-text-muted mb-2">
+                        <span className="cmd-keyword">const</span> email <span className="text-text-muted">=</span>
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formState.email}
+                        onChange={handleChange}
+                        required
+                        className="input"
+                        placeholder="&quot;your@email.com&quot;"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="company" className="block text-xs text-text-muted mb-2">
+                        <span className="cmd-keyword">const</span> company <span className="text-text-muted">=</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        value={formState.company}
+                        onChange={handleChange}
+                        className="input"
+                        placeholder="&quot;Company (optional)&quot;"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="message" className="block text-xs text-text-muted mb-2">
+                        <span className="cmd-keyword">const</span> message <span className="text-text-muted">=</span>
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        value={formState.message}
+                        onChange={handleChange}
+                        required
+                        rows={5}
+                        className="input resize-none"
+                        placeholder="&quot;Tell me about your project...&quot;"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={status === 'loading' || status === 'success'}
+                      className="btn btn-primary w-full py-4 disabled:opacity-50"
+                    >
+                      {status === 'loading' ? (
+                        <>
+                          <Loader2 size={16} className="animate-spin" />
+                          Sending...
+                        </>
+                      ) : status === 'success' ? (
+                        <>
+                          <CheckCircle size={16} />
+                          Message Sent!
+                        </>
+                      ) : (
+                        <>
+                          <span className="cmd-prefix" style={{ color: '#0a0a0a' }}>$</span>
+                          ./send-message.sh
+                          <Send size={14} />
+                        </>
+                      )}
+                    </button>
+
+                    {status === 'success' && (
+                      <div className="text-center text-sm text-success">
+                        <span className="cmd-comment">// Thanks! I&apos;ll get back to you soon.</span>
+                      </div>
+                    )}
+                  </form>
                 </div>
-
-                <div>
-                  <label htmlFor="company" className="block text-sm font-medium mb-2">
-                    Company
-                  </label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    value={formState.company}
-                    onChange={handleChange}
-                    className="w-full bg-surface border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-accent transition-colors"
-                    placeholder="Your company (optional)"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
-                    Message *
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formState.message}
-                    onChange={handleChange}
-                    required
-                    rows={5}
-                    className="w-full bg-surface border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-accent transition-colors resize-none"
-                    placeholder="Tell me about your project or question..."
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={status === 'loading' || status === 'success'}
-                  className="w-full bg-accent hover:bg-accent/90 disabled:bg-accent/50 text-white px-6 py-4 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
-                >
-                  {status === 'loading' ? (
-                    <>
-                      <Loader2 size={18} className="animate-spin" />
-                      Sending...
-                    </>
-                  ) : status === 'success' ? (
-                    <>
-                      <CheckCircle size={18} />
-                      Message Sent!
-                    </>
-                  ) : (
-                    <>
-                      <Send size={18} />
-                      Send Message
-                    </>
-                  )}
-                </button>
-
-                {status === 'success' && (
-                  <p className="text-center text-sm text-accent">
-                    Thanks for reaching out! I'll get back to you soon.
-                  </p>
-                )}
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -225,18 +281,19 @@ export default function ContactPage() {
       {/* Quick Response Note */}
       <section className="px-6 mt-16">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-muted">
-            I typically respond within 24-48 hours. For urgent matters, 
-            feel free to connect with me on{' '}
-            <a
-              href="https://www.linkedin.com/in/ashhatef/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-accent hover:underline"
-            >
-              LinkedIn
-            </a>
-            .
+          <p className="text-text-muted text-sm">
+            <span className="cmd-comment">
+              // Response time: 24-48h. For urgent matters, reach out on{' '}
+              <a
+                href="https://www.linkedin.com/in/ashhatef/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:text-primary-light transition-colors"
+              >
+                LinkedIn
+              </a>
+              .
+            </span>
           </p>
         </div>
       </section>
